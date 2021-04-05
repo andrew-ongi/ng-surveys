@@ -70,6 +70,7 @@ export class NgSurveyViewerComponent implements OnInit, OnDestroy {
       }
 
       if (event instanceof NavigationEnd) {
+        console.log('event subscribe', event);
         setTimeout(() => {
           this.initNavigation();
           this.isLoading = false;
@@ -103,6 +104,7 @@ export class NgSurveyViewerComponent implements OnInit, OnDestroy {
     this.isPrevPageEmpty = isNil(currentPageNode.previous);
     this.isNextPageEmpty = isNil(currentPageNode.next) && isNil(this.survey.summary);
 
+    // TODO: need to set redirect here
     if (pageUrlId === 'summary') {
       this.showSummary = true;
       this.isNextPageEmpty = true;
@@ -112,10 +114,13 @@ export class NgSurveyViewerComponent implements OnInit, OnDestroy {
   nextPage() {
     const elementPageFlowModifier = this.getElementPageFlowModifier();
     if (!!elementPageFlowModifier) {
+      console.log('1');
       this.pageNext = this.surveyViewerNavigation$.setGoToPage(elementPageFlowModifier.pageId);
     } else if (this.page.pageFlow.label === 'pageFlow.goToPage') {
+      console.log('2');
       this.pageNext = this.surveyViewerNavigation$.setGoToPage(this.page.pageFlow.pageId);
     } else {
+      console.log('3');
       this.pageNext = this.surveyViewerNavigation$.setNextPage();
     }
 

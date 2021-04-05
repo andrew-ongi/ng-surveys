@@ -10,6 +10,7 @@ export interface IBuilderOptions {
   pageButtons?: IBuilderPageButtonsOptionsBuilder[];
   importElement?: IBuilderImportElementOptionsBuilder;
   elementButtons?: IBuilderElementButtonsOptionsBuilder[];
+  config?: any;
 }
 
 export class BuilderOptionsModel implements IBuilderOptions {
@@ -20,6 +21,7 @@ export class BuilderOptionsModel implements IBuilderOptions {
     public pageButtons?: IBuilderPageButtonsOptionsBuilder[],
     public importElement?: IBuilderImportElementOptionsBuilder,
     public elementButtons?: IBuilderElementButtonsOptionsBuilder[],
+    public config?: any,
   ) {
     this.importSurvey = importSurvey ? importSurvey : null;
     this.surveyButtons = surveyButtons ? surveyButtons : null;
@@ -27,6 +29,7 @@ export class BuilderOptionsModel implements IBuilderOptions {
     this.pageButtons = pageButtons ? pageButtons : null;
     this.importElement = importElement ? importElement : null;
     this.elementButtons = elementButtons ? elementButtons : null;
+    this.config = config ? config : null;
   }
 }
 

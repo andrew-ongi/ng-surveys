@@ -5,6 +5,9 @@
 
 export * from './lib/providers/ng-surveys.service';
 export * from './lib/ng-surveys.module';
+export { NgSurveyStore } from './lib/store/ng-survey.store';
+export { SurveyActionTypes } from './lib/store/survey/survey.actions';
+export { SurveyReducer } from './lib/store/survey/survey.reducer';
 
 
 export {

@@ -21,6 +21,7 @@ import { SurveyViewerContainerComponent } from './layouts/survey-viewer-containe
     HttpClientModule,
     ShellModule,
     NgSurveysModule,
+
     /**
      * TODO
      * StoreModule.forRoot includes an object containing app and the appReducer

@@ -15,6 +15,7 @@ export class NgSurveyViewerNavigationService {
   private pages: IPageMap;
   public page = new BehaviorSubject<IPage>(null);
   private elements: IElementsMaps;
+  public redirect: string;
 
   constructor(
     private _ngSurveyStore: NgSurveyStore
@@ -31,6 +32,7 @@ export class NgSurveyViewerNavigationService {
     return nextPage.page;
   }
 
+  // mark by andrew
   public setNextPage(): IPage {
     const currentPage: IPageLinkedListNode = this.currentPageNode.value;
     const nextPage: IPageLinkedListNode = currentPage.next;
@@ -38,10 +40,16 @@ export class NgSurveyViewerNavigationService {
     this.prevPageLinkedList.value.append(currentPage.page);
     this.prevPageLinkedList.next(this.prevPageLinkedList.value);
 
+    console.log('nextPage', nextPage);
+    console.log('currentPage', currentPage);
     if (!!nextPage) {
+      console.log("render next page");
       this.currentPageNode.next(nextPage);
       return nextPage.page;
     } else {
+      console.log('this.redirect', this.redirect);
+      if (this.redirect) return { id: 'redirect', surveyId: this.redirect }
+      console.log("render summary");
       return { id: 'summary', surveyId: '' };
     }
   }
@@ -79,6 +87,14 @@ export class NgSurveyViewerNavigationService {
     // Get Elements
     this._ngSurveyStore.elements.subscribe(res => {
       this.elements = res;
+    });
+
+    this._ngSurveyStore.builderOptions.subscribe(res => {
+      console.log('builder', res);
+      if (res.config) {
+        this.redirect = res.config.redirect;
+        console.log('this.redirect', this.redirect);
+      }
     });
   }
 

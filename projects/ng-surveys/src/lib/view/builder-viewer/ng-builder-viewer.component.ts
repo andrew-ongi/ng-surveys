@@ -90,6 +90,7 @@ export class NgBuilderViewerComponent implements OnInit, OnDestroy {
     });
   }
 
+  // mark by andrew
   importSurvey(cb) {
     cb().subscribe(ngSurveyState => {
       ngSurveyState.survey.isLoading = true;
